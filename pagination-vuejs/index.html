@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Pagination With Vuejs</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <!-- Custom styles for this template -->
+  <link href="dist/css/pagination-style.css" rel="stylesheet">
+  <link rel="stylesheet" href="dist/css/mdi-icons.css">
+</head>
+<body>
+<header>
+  <div class="navbar navbar-dark bg-dark box-shadow">
+    <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <strong>Pagination With Vuejs</strong>
+      </a>
+    </div>
+  </div>
+</header>
+<main role="main" id="pagination-app">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Pagination With Vuejs</h1>
+    </div>
+  </section>
+  <h1 class="text-center">POSTS</h1>
+  <div class="album py-5 bg-light">
+    <div class="container" v-cloak>
+      <div class="row">
+        <div class="col-md-4" v-for="post in displayedPosts">
+          <div class="card mb-4 box-shadow post-cards">
+          <!-- <img class="card-img-top" src="dist/img/placeholder-blue-800x600px.png" alt="Card image cap"> -->
+            <transition>
+              <div v-animate-css.hover="'pulse'" class="card-body">
+
+                <h5 v-animate-css="'fadeInRight'" class="capitalize">{{post.title}}</h5>
+                <p v-animate-css="'fadeInLeft'" class="card-text">{{post.text.slice(0, 100)}}...</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <!-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
+                  </div>
+                </div>
+              </div>
+            </transition>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix btn-group col-md-2 offset-md-5">
+        <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page != 1" @click="page--"
+                v-animate-css.click="'tada'"> <<
+        </button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber in pages.slice(page-1, page+5)"
+                @click="page = pageNumber" v-animate-css.click="'tada'"> {{pageNumber}}
+        </button>
+        <button type="button" v-if="page < pages.length" @click="page++" class="btn btn-sm btn-outline-secondary"
+                v-animate-css.click="'tada'"> >>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+  </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="dist/js/vue.min.js"></script>
+<script src="dist/js/axios.min.js"></script>
+<script src="dist/js/pagination.js"></script>
+<script src="https://unpkg.com/v-animate-css/dist/v-animate-css.js"></script>
+<script>
+  Vue.use(VAnimateCss.default);
+</script>
+</body>
+</html>
